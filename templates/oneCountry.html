@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{%block header%}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/card.css') }}">
+{%endblock%}
+{% block body %}
+<style>
+    .row>* {
+        height: 25rem;
+}
+</style>
+    <div class="container-fluid">
+        <div class="row card-group" style="height: 25rem;">
+            
+                <div class="col-md-12 my-3 p-3">
+                  <div class="card card-primary text-center">
+                    <img class="myimg" src="{{data['countryInfo']['flag']}}" alt="flag">
+                    <div class="card-body">
+                        <h1>{{data['country']}}</h1>
+                      <!-- <div class="badge badge-primary badge-sm text-info">{{data['country']}}</div> -->
+                      <div class="card-title">Total Cases  {{data['cases']}}</div>
+                      <p class="card-text">Today's Cases : {{data['todayCases']}}</p>
+                      <p class="card-text text-danger">Deaths {{data['deaths']}} <small class="text-warning"> Deaths Today {{data['todayDeaths']}}</small></p>
+                      <p class="card-text">Recovered {{data['recovered']}}</p>
+                      <p class="card-text">Active {{data['active']}}</p>
+                      <p class="card-text">Deaths Per Million {{data['deathsPerOneMillion']}}</p>
+                    </div>
+                    <div class="card-footer">
+                      <a href="{{url_for('index')}}" class="btn btn-outline-secondary btn-icon-right">
+                        <span>HOME
+                          <img src="https://static3.avast.com/1/web/i/v2/components/arrow-m-right-orange.png" height="24">
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+        </div>
+    </div>
+   
+{%endblock%}

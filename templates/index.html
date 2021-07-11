@@ -1,0 +1,369 @@
+{% extends "base.html" %}
+{%block header%}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/continent.css') }}">
+{%endblock%}
+{% block body %}
+    <!-- <div class="container-fluid">
+      <div class="jumbotron">
+        <h4 class="display-4">Continents</h4>
+        <p>Saadain Ali | Arbaz Ahmed | Salman Ahmed.</p>
+        <p class="lead">
+          <a class="btn btn-primary btn-sm" href="{{url_for('index')}}" role="button">Covid Tracker</a>
+        </p>
+      </div> -->
+
+      <div class="container-fluid p-3 my-3">
+         <div class="card p-4 text-center">
+            <h1>Continents</h1>
+         </div>
+         <div class="card-body">
+           <h5 class="card-title">Web Engineering Project</h5>
+           <p class="card-text">Saadain Ali | Arbaz Ahmed | Salman Ahmed.</p>
+           <a href="{{url_for('index')}}" class="btn btn-primary btn-sm">Covid Tracker</a>
+         </div>
+       </div>
+
+   
+
+
+      <div class="row">
+        {%for data in result%}
+        {% set name = data['continent'].split('/')[0].replace(' ','') %}
+        <div class="col-md-4 my-3 p-3">
+          <div class="card card-{{name}}">
+            <!-- <h3 class="card-title"><a href="{{url_for ('continent' , name =  data['continent'].split('/')[0].replace(' ',''))}}" class="card-link">{{data['continent']}}</a></h3> -->
+            <!-- <h3 class="card-title" id="{{data['continent']}}"><a href="{{url_for ('continent' , name =  data['continent']) }}" class="card-link">{{data['continent']}}</a></h3> -->
+            <h3 class="card-title" id="{{data['continent']}}">{{data['continent']}}</h3>
+            <!-- <p>A curated set of   ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p> -->
+            <div class="row">
+              <div class="col-md-6">
+                  <h4 class="text-info">Cases</h4>
+                  <p class="text-muted">
+                      {{data['cases']}}
+                  </p>
+              </div>
+              <div class="col-md-6">
+                <h4 class="text-info">Deaths</h4>
+                <p class="text-muted">
+                    {{data['deaths']}}
+                </p>
+            </div>
+            <div class="col-md-6">
+                <h4 class="text-info">Recovered</h4>
+                  <p class="text-muted">
+                    {{data['recovered']}}
+                </p>
+            </div>
+            <div class="col-md-6">
+                <h4 class="text-info">Active</h4>
+                  <p class="text-muted">
+                    {{data['active']}}
+                </p>
+            </div>
+          </div>
+          </div>
+      </div>
+        {%endfor%}
+      </div> 
+
+      <div  style="margin-left:15px; margin-right:15px">
+        <div class="row">
+            <div class="col md-12">
+    
+                <div class="jumbotron p-3">
+    
+                    <h2>Manage <b>Records </b>  <button type="button"  class="btn btn-success float-right"
+                    
+                      data-toggle="modal" data-target="#mymodal">Add New Data</button> </h2>
+    
+    
+                      <div class="form-group mb-3 has-search">
+                         <span class="fa fa-search form-control-feedback"></span>
+                         <input type="text" id="myInput" onkeyup="myFunction()" class="form-control" placeholder="Search username" aria-label="Search username" aria-describedby="basic-addon2">
+                       </div>
+                      
+    
+    
+    
+                    
+                   
+                    <table id="myTable" class="table table-hover table-striped table-dark table-responsive-sm">
+    
+                      <tr>
+                         <th>name</th>
+                         <th>bloodtype</th>
+                         <th>location</th>
+                         <th>country</th>
+                         <th>recoverydate</th>
+                         <th>Gender</th>
+                         <th>EDIT</th>
+                         <th>DELETE</th>
+                         </tr>
+    
+    
+                       {% for row in employees %}
+                        <tr>
+                            <td>{{row.name}}</td>
+                            <td>{{row.bloodtype}}</td>
+                            <td>{{row.location}}</td>
+                            <td>{{row.country}}</td>
+                            <td>{{row.recoverydate}}</td>
+                            <td>{{row.gender}}</td>
+    
+                            <td>
+                                <a href="/update/{{row.name}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.country}}">Edit</a>
+                            </td>
+                            <td>
+                               <a href="/delete/{{row.name}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+    
+                            </td>
+    
+                        </tr>
+                        
+                      <!-- Modal Edit Employee-->
+    <div id="modaledit{{row.country}}" class="modal fade" role="dialog">
+       <div class="modal-dialog">
+    
+    
+          <div class="modal-content">
+    
+    
+             <div class="modal-header">
+    
+    
+                <h4 class="modal-title">Update Information</h4>
+    
+    
+             </div>
+    
+    
+             <div class="modal-body">
+    
+    
+               
+    
+                <form action="{{ url_for('update') }}" method="POST">
+    
+    
+                   <div class="form-group">
+                      <label>name:</label>
+                       <input type="hidden"  name="oldname" value="{{row.name}}">
+    
+                      <input type="text" class="form-control" name="name" value="{{row.name}}">
+                   </div>
+    
+                   <div class="form-group">
+    
+    
+                      <label>bloodtype:</label>
+                      
+                      <input type="text" class="form-control" name="bloodtype" value="{{row.bloodtype}}">
+    
+    
+                   </div>
+    
+                   <div class="form-group">
+    
+    
+                      <label>location:</label>
+    
+                      <input type="text" class="form-control" name="location" value="{{row.location}}">
+    
+    
+                   </div>
+    
+                   <div class="form-group">
+    
+    
+                      <label>country:</label>
+    
+                      <input type="text" class="form-control" name="country" value="{{row.country}}" disabled>
+    
+    
+                   </div>
+    
+                   <div class="sl-select">
+                      <select name="gender" name="gender">
+                          <option value="{{row.gender}}"  hidden="">{{row.gender}}</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                           <!-- <option value="Other">Other</option> -->
+                      </select>
+                  </div>
+                   
+    
+                   <div class="form-group">
+                      <label>recoverydate:</label>
+    
+                      <input type="text" class="form-control" name="recoverydate" value="{{row.recoverydate}}">
+                   </div>
+    
+                   <div class="form-group">
+    
+                      
+                      <button class="btn btn-primary" type="submit" onclick="return confirm('Are You Sure To Update ?')">Update</button> 
+    
+    
+                   </div>
+    
+    
+                </form>
+    
+    
+             </div>
+    
+    
+             <div class="modal-footer">
+    
+    
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    
+    
+             </div>
+    
+    
+          </div>
+    
+    
+       </div>
+    
+    </div>
+    
+    
+                        {% endfor %}
+    
+    
+                    </table>
+    
+    
+                </div>
+    
+    
+    
+                      <!-- Modal Add Employee-->
+    
+    
+    <div id="mymodal" class="modal fade" role="dialog">
+       <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+             <div class="modal-header">
+    
+                <h4 class="modal-title">Add Student</h4>
+             </div>
+             <div class="modal-body">
+             
+             <div class="row">
+                <div class="col-md-6">
+                <form action="{{url_for('insert')}}" method="POST">
+                   <div class="form-group">
+                      <label>name:</label>
+                       <!-- <input type="hidden"  name="country"> -->
+    
+                      <input type="text" class="form-control" id="name" name="name" required="1">
+                   </div>
+    
+                   <div class="form-group">
+    
+    
+                      <label>bloodtype:</label>
+                      
+                      <input type="text" class="form-control" id="bloodtype" name="bloodtype"  required="1">
+    
+    
+                   </div>
+    
+                   <div class="form-group">
+    
+    
+                      <label>location:</label>
+    
+                      <input type="text" class="form-control"  id="location" name="location" required="1">
+    
+    
+                   </div>
+    
+                   <div class="form-group">
+    
+    
+                      <label>country:</label>
+    
+                      <input type="text" class="form-control" id="country" name="country" required="1" >
+    
+    
+                   </div>
+    
+                   <div class="sl-select">
+                      <select id="gender" name="gender" name="gender">
+                          <option value=""  hidden="">Gender*</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                           <!-- <option value="Other">Other</option> -->
+                      </select>
+                  </div>
+                   
+    
+                   <div class="form-group">
+                      <label>recoverydate:</label>
+    
+                      <input type="text" class="form-control" id="recoverydate" name="recoverydate" required="1" >
+                   </div>
+    
+                   <!-- <div class="form-group"> -->
+    
+    
+                   <div class="form-group">
+    
+    
+                      <button class="btn btn-primary" type="submit" onclick="return confirm('Are You Sure To Add ?')">Add </button>
+    
+    
+                   </div>
+    
+    
+                </form>
+             </div>
+    
+             </div>
+    
+             </div>
+    
+    
+             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+             </div>
+          </div>
+       </div>
+    </div>
+            </div>
+    
+        </div>
+    
+    
+    </div>
+    
+    </div>
+
+    <script>
+      $('.card-title').on('click', function() {
+        var name = this.id;
+        console.log(name)
+        $.ajax({
+            url : '/hi',
+            type: 'POST',
+            data : {'data':name},
+            success: function(data){
+              console.log(data)
+              window.location = data['url'] + '/' + data['params']
+            },
+            error: function(error){
+              console.log(data)
+              
+            }
+            
+        });
+    });
+    </script>
+{% endblock %}

@@ -1,0 +1,36 @@
+<div class="card" style="width: 100%;">
+    <div class="card-body">
+      <h5 class="card-title"><a href="{{url_for (data['continent'].split('/')[0].replace(' ',''))}}" class="card-link">{{data['continent']}}</a></h5>
+      <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+      <p class="card-text">Some quick about {{data['continent']}}.</p>
+      <div class="row">
+          <div class="col">
+              <h4 class="text-info">Cases</h4>
+              <p class="text-muted">
+                  {{data['cases']}}
+              </p>
+          </div>
+          <div class="col">
+            <h4 class="text-info">Deaths</h4>
+            <p class="text-muted">
+                {{data['deaths']}}
+            </p>
+        </div>
+        <div class="col">
+            <h4 class="text-info">Recovered</h4>
+              <p class="text-muted">
+                {{data['recovered']}}
+            </p>
+        </div>
+        <div class="col">
+            <h4 class="text-info">Active</h4>
+              <p class="text-muted">
+                {{data['active']}}
+            </p>
+        </div>
+      </div>
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+    </div>
+  </div>
+</div>

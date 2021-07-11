@@ -1,0 +1,76 @@
+body{
+    font-family: 'Nunito', sans-serif;
+    /* padding: 50px; */
+  }
+  .card{
+      border-radius: 4px;
+      background: #fff;
+      box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+        transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    padding: 14px 80px 18px 36px;
+    cursor: pointer;
+  }
+  
+  .card:hover{
+       transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  }
+  
+  .card h3{
+    font-weight: 600;
+  }
+  
+  .card img{
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    max-height: 120px;
+  }
+  
+  .card-Asia{
+    background-image: url(https://www.pngitem.com/pimgs/b/207-2072155_asia-png.png);
+        background-repeat: no-repeat;
+      background-position: right;
+      background-size: 140px;
+  }
+  
+  .card-NorthAmerica{
+     background-image: url(https://upload.wikimedia.org/wikipedia/en/e/e9/North_America.PNG);
+        background-repeat: no-repeat;
+      background-position: right;
+      background-size: 140px;
+  }
+  
+  .card-SouthAmerica{
+     background-image: url(https://www.seekpng.com/png/full/201-2013847_south-america-png.png);
+        background-repeat: no-repeat;
+      background-position: right;
+      background-size: 100px;
+  }
+  
+  .card-Europe{
+    background-image: url(https://assets.stickpng.com/images/585ab4b34f6ae202fedf292e.png);
+       background-repeat: no-repeat;
+     background-position: right;
+     background-size: 140px;
+ }
+
+ .card-Africa{
+    background-image: url(https://www.pngitem.com/pimgs/b/68-680152_african-continent-png.png);
+       background-repeat: no-repeat;
+     background-position: right;
+     background-size: 100px;
+ }
+
+ .card-Australia{
+    background-image:  url(https://www.clipartkey.com/mpngs/b/131-1312906_blank-ticket-clipart.png);
+       background-repeat: no-repeat;
+     background-position: right;
+     background-size: 140px;
+ }
+
+  @media(max-width: 990px){
+    .card{
+      margin: 20px;
+    }
+  } 
